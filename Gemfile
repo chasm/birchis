@@ -15,7 +15,7 @@ group :development, :test do
   gem "binding_of_caller"
   gem 'jasmine'
   gem 'fabrication'
-  gem 'faker'
+  gem 'ffaker'
 end
 
 gem 'sass-rails', '~> 4.0.0'
