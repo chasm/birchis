@@ -25,7 +25,7 @@ describe SessionController do
     end
     
     it "sets code and expires_at for a password reset request" do
-      post("create", email: email, password: nil)
+      post("create", email: email, password: "")
       
       pwresetuser = User.first
       

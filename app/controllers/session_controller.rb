@@ -12,16 +12,18 @@ class SessionController < ApplicationController
         user.expires_at = Time.now + 4.hours
         user.save
       end
+
+      render :new
     else
       user = User.authenticate(params[:email], params[:password])
       
       if user
         session[:user_id] = user.id
         redirect_to root_url
+      else
+        render :new
       end
     end
-
-    render :new
   end
 
   def destroy
