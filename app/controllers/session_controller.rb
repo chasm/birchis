@@ -11,6 +11,9 @@ class SessionController < ApplicationController
         user.code = SecureRandom.urlsafe_base64
         user.expires_at = Time.now + 4.hours
         user.save
+        
+        # Send the password reset email with the coded link
+        PasswordMailer.reset_email(user).deliver
       end
 
       render :new
