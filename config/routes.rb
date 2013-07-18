@@ -3,7 +3,8 @@ Birchis::Application.routes.draw do
   get "terms" => "site#terms"
   
   resource :session, only: [ :new, :create, :destroy ]
-  resource :password, only: [ :edit, :update ]
+  resource :password, only: [ :update ]
+  get "reset/:code" => "password#edit"
   
   get "login" => "session#new"
   post "login" => "session#create"

@@ -1,2 +1,23 @@
-<h1>Password#edit</h1>
-<p>Find me in app/views/password/edit.html.erb</p>
+<div class="row">
+  <div class="large-4 columns">
+    <h2></h2>
+    <p></p>
+  </div>
+  <div class="large-8 columns">
+    <h1>Choose a new password</h1>
+
+    <%= form_for @user, html: { autocomplete: :off } do |f| %>
+      <p>
+        <%= f.label :password %>
+        <%= f.text_field :password %>
+      </p>
+      <p>
+        <%= f.label :password_confirmation %>
+        <%= f.text_field :password_confirmation %>
+      </p>
+      <p>
+        <%= f.submit "Save password" %>
+      </p>
+    <% end %>
+  </div>
+</div>
