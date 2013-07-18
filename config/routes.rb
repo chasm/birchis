@@ -2,7 +2,8 @@ Birchis::Application.routes.draw do
   get "privacy" => "site#privacy"
   get "terms" => "site#terms"
   
-  resource :session , only: [ :new, :create, :destroy ]
+  resource :session, only: [ :new, :create, :destroy ]
+  resource :password, only: [ :edit, :update ]
   
   get "login" => "session#new"
   post "login" => "session#create"
