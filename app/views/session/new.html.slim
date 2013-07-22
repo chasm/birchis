@@ -1,0 +1,26 @@
+.row
+  .large-8.columns.login
+    h1.birchis birchis
+.row
+  .large-4.columns
+    h2 Join BIRCHIS
+  .large-4.columns
+    h2 Please log in
+
+    form action="/login" method="POST"
+      div
+        input#email.span3.clear type="text" name="email" placeholder="Email address"
+      div
+        input#password.span3 type="password" name="password" placeholder="Password"
+      div.pull-right.show-password
+          button#toggle-password-field.btn.btn-danger Show Password
+      div
+        = token_tag form_authenticity_token
+        input.btn.btn-success type="submit" value="Log In"
+  .large-4.columns
+    h2 Lost your password?
+    p
+      '
+        Forgot your password? Simply leave the password field blank, then click the
+        <strong>Log In</strong> button. We'll send you a coded link via email
+        that will let you reset your password.

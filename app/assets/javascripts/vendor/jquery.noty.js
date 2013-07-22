@@ -1,5 +1,5 @@
 /**
- * noty - jQuery Notification Plugin v2.1.0
+ * noty - jQuery Notification Plugin v2.0.3
  * Contributors: https://github.com/needim/noty/graphs/contributors
  *
  * Examples and Documentation - http://needim.github.com/noty/
@@ -104,8 +104,7 @@ if (typeof Object.create !== 'function') {
             self.options.theme.callback.onShow.apply(this);
 
             if ($.inArray('click', self.options.closeWith) > -1)
-                self.$bar.css('cursor', 'pointer').one('click', function (evt) {
-                    self.stopPropagation(evt);
+                self.$bar.css('cursor', 'pointer').one('click', function () {
                     if (self.options.callback.onCloseClick) {
                         self.options.callback.onCloseClick.apply(self);
                     }
@@ -118,8 +117,7 @@ if (typeof Object.create !== 'function') {
                 });
 
             if ($.inArray('button', self.options.closeWith) > -1)
-                self.$closeButton.one('click', function (evt) {
-                    self.stopPropagation(evt);
+                self.$closeButton.one('click', function () {
                     self.close();
                 });
 
@@ -211,10 +209,7 @@ if (typeof Object.create !== 'function') {
                         $.notyRenderer.render();
                     }
 
-					if (self.options.maxVisible > 0 && self.options.dismissQueue) {
-						$.notyRenderer.render();
-					}
-                })
+                });
 
         }, // end close
 
@@ -246,15 +241,6 @@ if (typeof Object.create !== 'function') {
             return this;
         },
 
-        stopPropagation:function (evt) {
-            evt = evt || window.event;
-            if (typeof evt.stopPropagation !== "undefined") {
-                evt.stopPropagation();
-            } else {
-                evt.cancelBubble = true;
-            }
-        },
-
         closed:false,
         shown:false
 
@@ -280,15 +266,7 @@ if (typeof Object.create !== 'function') {
 
         if ($.type(instance) === 'object') {
             if (instance.options.dismissQueue) {
-				if (instance.options.maxVisible > 0) {
-					if ($(instance.options.layout.container.selector + ' li').length < instance.options.maxVisible) {
-						$.notyRenderer.show($.noty.queue.shift());
-					} else {
-
-					}
-				} else {
-					$.notyRenderer.show($.noty.queue.shift());
-				}
+                $.notyRenderer.show($.noty.queue.shift());
             } else {
                 if ($.noty.ontap) {
                     $.notyRenderer.show($.noty.queue.shift());
@@ -419,7 +397,6 @@ if (typeof Object.create !== 'function') {
         timeout:false,
         force:false,
         modal:false,
-        maxVisible:5,
         closeWith:['click'],
         callback:{
             onShow:function () {
@@ -445,7 +422,7 @@ if (typeof Object.create !== 'function') {
 })(jQuery);
 
 // Helpers
-window.noty = function noty(options) {
+function noty(options) {
 
     // This is for BC  -  Will be deleted on v2.2.0
     var using_old = 0
@@ -513,10 +490,6 @@ window.noty = function noty(options) {
 
     if (!options.hasOwnProperty('dismissQueue')) {
         options.dismissQueue = jQuery.noty.defaults.dismissQueue;
-    }
-
-    if (!options.hasOwnProperty('maxVisible')) {
-        options.maxVisible = jQuery.noty.defaults.maxVisible;
     }
 
     if (options.buttons) {
