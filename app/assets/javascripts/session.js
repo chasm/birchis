@@ -1,17 +1,17 @@
 $(function() {
   $('#toggle-password-field').on('click', function(evt) {
-    if ($(this).hasClass('alert')) {
+    if ($(this).hasClass('btn-danger')) {
       $(this).html('Hide Password');
       
-      $(this).removeClass('alert');
-      $(this).addClass('success');
+      $(this).removeClass('btn-danger');
+      $(this).addClass('btn-success');
       
       $('#password').attr('type','text');
     } else {
       $(this).html('Show Password');
       
-      $(this).removeClass('success');
-      $(this).addClass('alert');
+      $(this).removeClass('btn-success');
+      $(this).addClass('btn-danger');
       
       $('#password').attr('type','password');
     }

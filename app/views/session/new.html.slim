@@ -1,10 +1,10 @@
 .row
-  .large-8.columns.login
-    h1.birchis birchis
+  .span8.login
+    h1 birchis
 .row
-  .large-4.columns
+  .span4
     h2 Join BIRCHIS
-  .large-4.columns
+  .span4
     h2 Please log in
 
     form action="/login" method="POST"
@@ -17,7 +17,7 @@
       div
         = token_tag form_authenticity_token
         input.btn.btn-success type="submit" value="Log In"
-  .large-4.columns
+  .span4
     h2 Lost your password?
     p
       '

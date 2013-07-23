@@ -15,9 +15,7 @@ html lang="en"
     <![endif]-->
   body
     .container
-      = render :partial => "layouts/navigation"
-      .page
-        == yield
+      == yield
     
     = javascript_include_tag "application"
     = render :partial => "layouts/messages"

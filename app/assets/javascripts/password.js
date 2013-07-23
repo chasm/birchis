@@ -1,47 +1,86 @@
-// Only run this code after everything has loaded (jQuery.ready)
-// and namespace it so we keep things out of the global namespace
 $(function() {
-  // Set the minimum strength once and use it multiple times
   var MIN_STRENGTH = 3;
+  var BAR_TYPES = [
+    '',
+    'progress-danger',
+    'progress-warning',
+    'progress-info',
+    'progress-success'
+  ];
   
-  // Set a "keyup" event handler on the password field
-  // Each time a key is pressed in that field, we'll calculate
-  // the password strength and change the meter, time-to-crack, etc.
-  $('#user_password').on('keyup', function(evt) {
-    // Get the new password and check its strength
-    var s = zxcvbn($(this).val());
+  var score = 0;
+  
+  var passwordsMatch = function() {
+    return $('#admin_password').val() === $('#admin_password_confirmation').val();
+  };
+  
+  var setMismatchDiv = function() {
+    var div = $('#match-div');
     
-    // Change the strength meter as necessary to match the new
-    // password's strength
+    if (passwordsMatch()) {
+      div.addClass('match');
+      div.html('Match!');
+    } else {
+      div.removeClass('match');
+      div.html('Mismatch!');
+    }
+  };
+  
+  var enableButton = function() {
+    if (score >= MIN_STRENGTH) {
+      $('#pw-quality').addClass('ok');
+      $('#pw-quality').html('Password strength OK');
+
+      if (passwordsMatch()) {
+        $('#save-password').removeClass('disabled');
+      } else {
+        $('#save-password').addClass('disabled');
+      }
+      
+      return true;
+    } else {
+      $('#save-password').addClass('disabled');
+      $('#pw-quality').removeClass('ok');
+      $('#pw-quality').html('Password too weak');
+      return false;
+    }
+  };
+  
+  $('#admin_password').on('keyup', function(evt) {
+    var strength = zxcvbn($(this).val());
+    score = strength.score;
+    
+    setMismatchDiv();
+    
+    $('#pw-meter')
+      .removeClass('progress-success')
+      .removeClass('progress-info')
+      .removeClass('progress-warning')
+      .removeClass('progress-danger')
+      .addClass(BAR_TYPES[score])
+    
     $('#strength-meter')
       .removeClass('w-0')
       .removeClass('w-1')
       .removeClass('w-2')
       .removeClass('w-3')
       .removeClass('w-4')
-      .addClass('w-' + s.score);
+      .addClass('w-' + score);
     
-    // Update the time-to-crack display
-    $('#time-to-crack').html(s.crack_time_display);
+    $('#time-to-crack').html(strength.crack_time_display);
     
-    // Update the hidden field that send the strength score
-    // to the server when the form is submitted
-    $('#hidden-strength').val(s.score);
+    $('#hidden-strength').val(score);
     
-    // Enable/disable the submit button depending on
-    // password strength
-    if (s.score >= MIN_STRENGTH) {
-      $('#save-password').removeClass('disabled');
-    } else {
-      $('#save-password').addClass('disabled');
-    }
+    enableButton();
   });
   
-  // Prevent the form from being submitted when the submit
-  // button is disabled (strength < MIN_STRENGTH)
-  $('#new_user').on('submit', function() {
-    if ($('#hidden-strength').val() < MIN_STRENGTH) {
-      return false;
-    }
+  $('#admin_password_confirmation').on('keyup', function(evt) {
+    setMismatchDiv();
+    enableButton();
+  });
+  
+  $('#new_admin').on('submit', function() {
+    console.log(enableButton());
+    return enableButton();
   });
 });

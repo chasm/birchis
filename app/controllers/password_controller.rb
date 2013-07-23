@@ -1,10 +1,12 @@
 class PasswordController < ApplicationController
   def edit
-    # find the user with the passed in code
+    # Find the user with the passed in code
     # then display the reset password form
     @user = User.find_by(code: params[:code])
     
-    unless @user and @user.expires_at > Time.now
+    if @user and @user.expires_at > Time.now
+      render :edit, layout: "layouts/public"
+    else
       redirect_to login_url, alert: "Reset link has expired. Please try again."
     end
   end

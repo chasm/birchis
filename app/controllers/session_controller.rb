@@ -1,6 +1,7 @@
 class SessionController < ApplicationController
   
   def new
+    render :new, layout: "layouts/public"
   end
 
   def create

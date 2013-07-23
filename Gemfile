@@ -3,19 +3,12 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 gem 'pg'
+gem 'cocoon'
 gem 'slim'
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
-gem "compass-rails"
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder'
-gem 'bcrypt-ruby', require: "bcrypt"
-
-group :doc do
-  gem 'sdoc', require: false
-end
+gem 'paperclip'
+gem 'simple_form'
+gem 'thin'
+gem 'rails-timeago'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -28,4 +21,16 @@ group :development, :test do
   gem 'fabrication'
   gem 'ffaker'
 end
+
+gem 'sass-rails'
+gem 'uglifier'
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'jbuilder'
+
+group :doc do
+  gem 'sdoc', require: false
+end
+
+gem 'bcrypt-ruby', require: "bcrypt"
 
