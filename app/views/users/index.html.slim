@@ -1,0 +1,17 @@
+.row
+  .large-12.columns
+    h1 Dem users
+    
+    p.pull-right
+      = link_to "Add a user", new_user_path
+
+    table.table
+      tbody
+        - @users.each do |user|
+          tr
+            td
+              = link_to user.email, user
+            td
+              = link_to "edit", edit_user_path(user)
+            td
+              = link_to "delete", user, method: :delete, confirm: "Are you sure?"
