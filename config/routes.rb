@@ -2,8 +2,9 @@ Birchis::Application.routes.draw do
   get "privacy" => "site#privacy"
   get "terms" => "site#terms"
   
-  get "reset/:code" => "password#edit"
-  patch "password" => "password#update", as: :password
+  get "reset/:code" => "password#edit", as: :password
+  put "reset/:code" => "password#update"
+  patch "reset/:code" => "password#update"
   
   get "login" => "session#new"
   post "login" => "session#create"

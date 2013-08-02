@@ -1,13 +1,22 @@
-class User < ActiveRecord::Base
+class User
+  include MongoMapper::Document
+   
   before_save :encrypt_password
   
   attr_accessor :password, :password_confirmation
   
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true, unless: "password.nil?"
+  key :email,      String, unique: true
+  key :salt,       String
+  key :fish,       String
+  key :code,       String
+  key :expires_at, Time
+  
+  timestamps!
+  
+  validate :validate_confirmation
   
   def self.authenticate(email, password)
-    user = User.find_by(email: email)
+    user = User.find_by_email(email)
     
     if user
       fish = BCrypt::Engine.hash_secret(password, user.salt)
@@ -19,6 +28,12 @@ class User < ActiveRecord::Base
   end
   
   private
+  
+  def validate_confirmation
+    unless password == password_confirmation
+      errors.add( :password_confirmation, "Passwords do not match.")
+    end
+  end
   
   def encrypt_password
     unless password.blank?
