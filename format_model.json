@@ -1,0 +1,31 @@
+format = {
+  "title": "Tiger Tales",
+  "organization_id": 1,
+  "scale": [
+    "You suck",
+    "You aren't so suck",
+    "You're not really suck",
+    "You have no suck"
+  ],
+  "start_at_zero": true,
+  "expectations": [
+    "Be cool",
+    "Don't be a fool",
+    "Stay in school"
+  ],
+  "periods": [
+    {
+      "name": "Period 1",
+      "activity": "Small group circles"
+    },
+    {
+      "name": "Period 2",
+      "activity": "Large group circles"
+    },
+    {
+      "name": "Period 3",
+      "activity": "Nap time"
+    }
+  ],
+  "reasons": ["Student absent","Teacher absent","Lost card","No school","Other"]
+}

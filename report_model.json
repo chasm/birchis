@@ -1,0 +1,33 @@
+report = {
+  "student_id": ObjectID,
+  "format_id": ObjectID,
+  "assessments": [
+    {
+      "period": "Period 1",
+      "activity": "Small group circles",
+      "observations": [
+        {
+          "expectation": "Be cool",
+          "rank": 0,
+          "rating": "You suck"
+        },
+        {
+          "expectation": "Don't be a fool",
+          "rank": 2,
+          "rating": "You're not really suck"
+        },
+        {
+          "expectation": "Stay in school",
+          "rank": 3,
+          "rating": "You have no suck"
+        }
+      ]
+    },
+    {
+      "period": "Period 2",
+      "activity": "Large group circles",
+      "observations": [],
+      "reason_not_observed": "Student absent"
+    }
+  ]
+}
